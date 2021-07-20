@@ -38,8 +38,22 @@ module.exports = {
     }
   },
   module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015']
+        }
+      }
+    ],
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
+      {
+        test: /\.less$/,
+        loader: ["style-loader", "css-loader", "less-loader"]
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
